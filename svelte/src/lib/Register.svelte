@@ -59,6 +59,11 @@
         font-size: 20px;
         padding-left: 10px;
     }
+    .register button:active {
+        background-color: #765291;
+        box-shadow: 0 5px #353f54;
+        transform: translateY(3px);
+    }
     .register a {
         color: #FFF;
         text-decoration: none;

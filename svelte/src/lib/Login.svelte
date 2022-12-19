@@ -11,31 +11,34 @@
 </div>
 
 <script>
-    function login()
+    import {getNotificationsContext} from 'svelte-notifications'
+    const addNotification = getNotificationsContext()
+    async function login()
     {
         const username = document.querySelector('input[key="username"]').value;
         const password = document.querySelector('input[key="password"]').value;
         
-
-        localStorage.setItem("CRUDAppUsername", username);
-        window.location.href = '/';
-        // const response = fetch('/api/login', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         username,
-        //         password
-        //     })
-        // })
-
-        // if(response.success)
-        // {
-        //     localStorage.setItem("CRUDAppUsername", username);
-        //     localStorage.setItem("CRUDAppLoggedIn", "true")
-        //     window.location.href = '/';
-        // }
+        console.log(username, password)
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                password
+            })
+        })
+        console.log(response)
+        if(response.status === 200)
+        {
+            localStorage.setItem("CRUDAppUsername", username);
+            localStorage.setItem("CRUDAppLoggedIn", "true")
+            window.location.href = '/';
+        } 
+        else {
+            alert("Invalid username or password")
+        }
 
     }
 </script>
@@ -77,6 +80,8 @@
         padding-left: 0px;
     }
     .login button {
+        cursor: pointer;
+        z-index: -1;
         width: 400px;
         height: 40px;
         border-radius: 5px;
@@ -86,6 +91,11 @@
         color: white;
         font-size: 20px;
         padding-left: 10px;
+    }
+    .login button:active {
+        background-color: #765291;
+        box-shadow: 0 5px #353f54;
+        transform: translateY(3px);
     }
     .login a {
         color: #FFF;

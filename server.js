@@ -43,12 +43,13 @@ app.post("/api/login", (req, res) => {
             return
         }
         if (row) {
+            console.log(row)
             if (row.password === req.body.password) {
                 res.status(200).send({ success: true, username: row.username });
                 return;
             }
         }
-        res.status(200).send({ success: false });
+        res.status(201).send({ success: false });
     });
 });
 
