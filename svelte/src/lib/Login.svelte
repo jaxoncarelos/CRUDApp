@@ -6,7 +6,7 @@
             <input type="password" placeholder="Password" key="password" />
             <button on:click={login}>Login</button>
         </form>
-        <a href="/login">Already have an account?</a>
+        <a href="/register">Don't have an account?</a>
     </div>
 </div>
 

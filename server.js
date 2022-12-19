@@ -3,11 +3,31 @@ import sqlite3 from 'sqlite3';
 import {handler} from './svelte/build/handler.js'
 import cors from 'cors';
 import bodyParser from 'body-parser';
-
+import file from 'fs';
+const postsDb = new sqlite3.Database("./posts.db");
 const db = new sqlite3.Database('./data.db');
 const app = express();
 const port = 5000;
 
+// count the number of posts in posts.db table posts and return the number
+// this is used to assign a postId to a new post
+
+function countPosts() {
+    return new Promise((resolve, reject) => {
+        postsDb.get("SELECT COUNT(*) FROM posts", (err, row) => {
+            if (err) {
+                console.log(err);
+                reject(err);
+            }
+            console.log(row);
+            resolve(row["COUNT(*)"]);
+        });
+    });
+
+}
+let postId = await countPosts().then(result => { return result; });
+
+console.log(postId)
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -15,6 +35,40 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get("/express", (req, res) => {
     res.send("Hello from Express");
 });
+
+
+app.post("/api/createPost", (req, res) => {
+    const body = req.body;
+    const username = body.username;
+    const content = body.content;
+    console.log(body, postId)
+    postsDb.run("INSERT INTO posts (postId, username, content) VALUES (?, ?, ?)", [`${postId}`, username, content], (err) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+        console.log("successfully added post")
+        postId++;
+        file.writeFile("postid.txt", `${postId}`, (err) => {
+            if (err) throw err;
+            console.log("postid.txt updated");
+        });
+    });
+    res.status(200).send({ success: true });
+});
+
+app.get("/api/fetchPosts", (req, res) => {
+    postsDb.all("SELECT * FROM posts ORDER BY postId DESC", (err, rows) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+        console.log(rows)
+        res.status(200).send(rows);
+
+    });
+});
+
 
 
 const signupCheckSQL = db.prepare("SELECT * FROM users WHERE username = ?");

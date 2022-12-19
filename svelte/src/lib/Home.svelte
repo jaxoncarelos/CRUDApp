@@ -11,13 +11,35 @@
         </ul>
     </nav>
     <div>
-        I HAVE NO IDEA WAHT TO PUT HERE
+        <CreatePost />
+        {#await getPosts() then posts}
+            <PostList posts={posts} />
+        {:catch error}
+            <p>There was an error loading the posts</p>
+        {/await}
     </div>
 </main>
 {/if}
 <script>
     import { browser } from '$app/environment';
+    import CreatePost from './Posts/CreatePost.svelte';
+    import PostList from './Posts/PostList.svelte';
 
+
+    async function getPosts()
+    {
+        // create an example post in postList
+        console.log("called")
+        const posts = await fetch("/api/fetchPosts", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+
+        console.log(posts)
+        return posts;
+    }
 </script>
 
 <style>
