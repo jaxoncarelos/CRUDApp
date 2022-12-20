@@ -121,6 +121,8 @@
 
         if(registerResponse.success) {
             alert("Successfully registered");
+            localStorage.setItem("CRUDAppUsername", username)
+            localStorage.setItem("CRUDAppLoggedIn", true)
             window.location.href = "/";
         } else {
             alert("Something went wrong");

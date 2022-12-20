@@ -75,7 +75,7 @@
     main li {
         padding: 10px;
         position: relative;
-        left: 85vw;
+        left: 92vw;
         float: left;
         font-family: 'Roboto', sans-serif;
         font-size: 15px;

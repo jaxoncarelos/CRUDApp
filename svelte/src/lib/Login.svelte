@@ -11,8 +11,7 @@
 </div>
 
 <script>
-    import {getNotificationsContext} from 'svelte-notifications'
-    const addNotification = getNotificationsContext()
+
     async function login()
     {
         const username = document.querySelector('input[key="username"]').value;

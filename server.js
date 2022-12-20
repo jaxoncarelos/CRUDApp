@@ -37,6 +37,26 @@ app.get("/express", (req, res) => {
 });
 
 
+app.post("/api/editPost", (req, res) => {
+    const body = req.body;
+    const postId = body.postId;
+    const content = body.content;
+
+    postsDb.run("UPDATE posts SET content = ? WHERE postId = ?", [content, postId], (err) => { console.log(err) })
+
+    res.status(200).send({ success: true });
+});
+app.post("/api/deletePost", (req, res) => {
+    const body = req.body;
+    const postId = body.postId;
+    postsDb.run(`DELETE FROM posts WHERE postId = ${postId}`, (err) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+        console.log("successfully deleted post")
+    });
+});
 app.post("/api/createPost", (req, res) => {
     const body = req.body;
     const username = body.username;
