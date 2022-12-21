@@ -83,16 +83,16 @@
         };
     async function register() {
         const username = document.querySelector("input[placeholder='Username']").value;
-        console.log(username)
+
         const usernameAvailable = await fetch("/api/usernameCheck?username=" + username).then(res => res.json());
-        console.log(usernameAvailable.usernameAvailable);
+
         
         if(!usernameAvailable.usernameAvailable) {
-            console.log("in")
+
             alert("Username is already taken");
             return;
         } else {
-            console.log("out")
+
         }
         const email = document.querySelector("input[placeholder='Email']").value;
         if(!validateEmail(email)) {
@@ -105,7 +105,7 @@
             alert("Passwords do not match");
             return;
         }
-        console.log(username, email, password)
+
         // fetch /api/register with username email password
         const registerResponse = await fetch("/api/register", {
             method: "POST",

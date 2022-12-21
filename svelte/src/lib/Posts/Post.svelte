@@ -1,16 +1,15 @@
 <script>
     export let post;
-    console.log(post)
+
     import {browser} from '$app/environment'
     function handleDelete(){
-        console.log(localStorage.getItem("CRUDAppUsername"))
-        console.log(post.username)
+
         if(!(post.username == localStorage.getItem("CRUDAppUsername")))
         {
             alert("You can't delete this post")
             return;
         }
-        console.log("delete")
+
         fetch('/api/deletePost', {
             method: 'POST',
             headers: {
@@ -48,10 +47,10 @@
                 })
             });
             const data = await res.json();
-            console.log(data);
+  
             if(data)
             {
-                console.log("nice")
+
                 window.location.reload();
             }
         }

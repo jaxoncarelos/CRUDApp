@@ -29,7 +29,7 @@
     async function getPosts()
     {
         // create an example post in postList
-        console.log("called")
+
         const posts = await fetch("/api/fetchPosts", {
             method: "GET",
             headers: {
@@ -37,7 +37,7 @@
             }
         }).then(res => res.json())
 
-        console.log(posts)
+
         return posts;
     }
 </script>

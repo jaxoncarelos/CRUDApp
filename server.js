@@ -128,10 +128,9 @@ app.post("/api/login", (req, res) => {
 });
 
 app.post("/api/register", async (req, res) => { 
-    console.log("register called")
+
     // check the username on usernameCheck and then if it's available, insert the user into the database
     const body = req.body;
-    console.log(body)
     db.get("SELECT * FROM users WHERE username = ?", [body.username.toLowerCase()], (err, row) => {
         if (err) {
             console.log(err);

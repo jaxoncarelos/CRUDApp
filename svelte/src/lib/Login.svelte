@@ -17,7 +17,7 @@
         const username = document.querySelector('input[key="username"]').value;
         const password = document.querySelector('input[key="password"]').value;
         
-        console.log(username, password)
+
         const response = await fetch('/api/login', {
             method: 'POST',
             headers: {
@@ -28,7 +28,7 @@
                 password
             })
         })
-        console.log(response)
+
         if(response.status === 200)
         {
             localStorage.setItem("CRUDAppUsername", username);
