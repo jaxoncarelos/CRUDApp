@@ -32,9 +32,7 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get("/express", (req, res) => {
-    res.send("Hello from Express");
-});
+
 
 
 app.post("/api/editPost", (req, res) => {
@@ -68,11 +66,6 @@ app.post("/api/createPost", (req, res) => {
             return
         }
         console.log("successfully added post")
-        postId++;
-        file.writeFile("postid.txt", `${postId}`, (err) => {
-            if (err) throw err;
-            console.log("postid.txt updated");
-        });
     });
     res.status(200).send({ success: true });
 });
@@ -83,7 +76,7 @@ app.get("/api/fetchPosts", (req, res) => {
             console.log(err);
             return
         }
-        console.log(rows)
+
         res.status(200).send(rows);
 
     });
@@ -117,7 +110,7 @@ app.post("/api/login", (req, res) => {
             return
         }
         if (row) {
-            console.log(row)
+
             if (row.password === req.body.password) {
                 res.status(200).send({ success: true, username: row.username });
                 return;
@@ -136,7 +129,7 @@ app.post("/api/register", async (req, res) => {
             console.log(err);
             return
         }
-        console.log(row)
+
         if (row) {
             res.status(200).send({ success: false });
             return;
