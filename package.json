@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm i -g vite; cd svelte && npm run build && cd .. && node server.js"
+    "build": "npm install; cd svelte && npm run build && cd .. && node server.js"
   },
   "author": "",
   "license": "ISC",
