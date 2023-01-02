@@ -5,12 +5,9 @@
 
 <div class="postList">
     {#if !posts }
-
         <p>There are no posts yet</p>
     {:else}
-
         {#each posts as post (post.postId)}
-
             <Post post={post} />
         {/each}
     {/if}
