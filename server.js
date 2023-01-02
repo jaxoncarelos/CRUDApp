@@ -157,3 +157,7 @@ app.get("/api/usernameCheck", (req, res) => {
 
 
 app.use(handler);
+
+app.listen(port, () => {
+    console.log(`Server running at ${port}`);
+});
