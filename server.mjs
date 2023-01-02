@@ -1,9 +1,8 @@
-import express from 'express'; 
-import sqlite3 from 'sqlite3';
-import {handler} from './svelte/build/handler.js'
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import file from 'fs';
+const express = require("express"); 
+const sqlite3 = require("sqlite3").verbose();
+const handler = require('./svelte/build/handler.js')
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const postsDb = new sqlite3.Database("./posts.db");
 const db = new sqlite3.Database('./data.db');
 const app = express();
@@ -161,5 +160,5 @@ app.use(handler);
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
 });
-
+ 
 module.exports = app;
