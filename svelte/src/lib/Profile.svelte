@@ -1,8 +1,17 @@
 {#if browser}
-<main>
-    <button on:click={logOut}>Log out</button>
-    <Namecard />
-</main>
+    {#await doesUserExist(username) then userExists}
+        {#if userExists}
+            <h1>404 User Not Found</h1>
+        {:else}
+        <main>
+            <button on:click={logOut}>Log out</button>
+            <Namecard username={username}/>
+            {#await fetch("/api/fetchUserPosts?username=" + username).then(res => res.json()) then posts}
+                <PostList posts={posts} style="transform: translateY(10%)"/>
+            {/await}
+        </main>
+        {/if}
+    {/await}
 {/if}
 <style>
     main {
@@ -28,10 +37,20 @@
 </style>
 
 <script>
-    import Namecard from '../lib/Namecard.svelte';
+    import PostList from '$lib/Posts/PostList.svelte';
+    import Namecard from '$lib/Namecard.svelte';
     import { browser } from '$app/environment';
+
+    export let username;
+
+    async function doesUserExist(username)
+    {
+        const usernameAvailable = await fetch("/api/usernameCheck?username=" + username).then(res => res.json());
+        return usernameAvailable.usernameAvailable;
+    }
+
     function logOut(){
-        localStorage.setItem("CRUDAppUsername", "")
+        localStorage.removeItem("CRUDAppUsername")
         localStorage.setItem("CRUDAppLoggedIn", false)
         window.location.href = '/login'
     }

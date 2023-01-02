@@ -1,10 +1,12 @@
 <div class="wrapper">
     <div class="sub">
-        <img src="blank.webp" height="300">
-        <div class="name">{localStorage.getItem("CRUDAppUsername")}</div>
+        <img src="blank.webp" height="300" alt="blank">
+        <div class="name">{username}</div>
     </div>
 </div>
-
+<script>
+    export let username;
+</script>
 <style>
     .wrapper {
         padding: 10vw;
