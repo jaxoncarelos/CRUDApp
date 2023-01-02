@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 const postsDb = new sqlite3.Database("./posts.db");
 const db = new sqlite3.Database('./data.db');
 const app = express();
-const port = 8200;
+const port = 80;
 
 // count the number of posts in posts.db table posts and return the number
 // this is used to assign a postId to a new post
@@ -161,4 +161,3 @@ app.listen(port, () => {
     console.log(`Server running at ${port}`);
 });
  
-module.exports = app;
