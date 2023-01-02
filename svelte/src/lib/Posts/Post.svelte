@@ -73,7 +73,6 @@
         border-radius: 10px;
         padding: 10px;
         margin: 10px;
-        width: 100%;
     }
     .post .content{
         color: white;
@@ -81,9 +80,7 @@
     .post .id {
         position: relative;
         color: #FFF;
-        left: 95%;
         font-size: 12px;
-        transform: translateY(-50%);
     }
     .post .username {
         color: #FFF;
