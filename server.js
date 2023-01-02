@@ -12,20 +12,21 @@ const port = 5000;
 // count the number of posts in posts.db table posts and return the number
 // this is used to assign a postId to a new post
 
-function countPosts() {
-    return new Promise((resolve, reject) => {
-        postsDb.get("SELECT COUNT(*) FROM posts", (err, row) => {
-            if (err) {
-                console.log(err);
-                reject(err);
-            }
-            console.log(row);
-            resolve(row["COUNT(*)"]);
-        });
-    });
+const signupCheckSQL = db.prepare("SELECT * FROM users WHERE username = ?");
+const signupSQL = db.prepare("INSERT INTO users (username, password, email, creationDate) VALUES (?, ?, ?, datetime('now'))"); 
 
-}
-let postId = await countPosts().then(result => { return result; });
+
+let postId = postsDb.get('SELECT * FROM posts ORDER BY postId DESC LIMIT 1', (err, row) => {
+    if (err) {
+        console.log(err);
+        return
+    }
+    if (row) {
+        postId = row.postId + 1;
+    } else {
+        postId = 1;
+    }
+})
 
 console.log(postId)
 app.use(cors())
@@ -67,41 +68,9 @@ app.post("/api/createPost", (req, res) => {
         }
         console.log("successfully added post")
     });
+    postId++;
     res.status(200).send({ success: true });
 });
-
-app.get("/api/fetchPosts", (req, res) => {
-    postsDb.all("SELECT * FROM posts ORDER BY postId DESC", (err, rows) => {
-        if (err) {
-            console.log(err);
-            return
-        }
-
-        res.status(200).send(rows);
-
-    });
-});
-
-
-
-const signupCheckSQL = db.prepare("SELECT * FROM users WHERE username = ?");
-const signupSQL = db.prepare("INSERT INTO users (username, password, email, creationDate) VALUES (?, ?, ?, datetime('now'))");
-app.get("/api/usernameCheck", (req, res) => {
-    // check the username on usernameCheck and then if it's available, return json with usernameAvailable: true
-    signupCheckSQL.get([req.query.username.toLowerCase()], (err, row) => {
-        if (err) {
-            console.log(err);
-            return
-        }
-        console.log(row)
-        if (row) {
-            res.status(200).send({ usernameAvailable: false });
-            return;
-        }
-        res.status(200).send({ usernameAvailable: true });
-    });
-});
-
 app.post("/api/login", (req, res) => {
     // check the username and password on login and then if it's available, return json with usernameAvailable: true
     signupCheckSQL.get([req.body.username.toLowerCase()], (err, row) => {
@@ -143,6 +112,44 @@ app.post("/api/register", async (req, res) => {
             res.status(200).send({ success: true });
             
         });
+    });
+});
+app.get("/api/fetchUserPosts", (req, res) => {
+    postsDb.all(`SELECT * FROM posts WHERE username = '${req.query.username}' ORDER BY postId DESC`, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+
+        res.status(200).send(rows);
+
+    });
+});
+
+app.get("/api/fetchPosts", (req, res) => {
+    postsDb.all("SELECT * FROM posts ORDER BY postId DESC", (err, rows) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+
+        res.status(200).send(rows);
+
+    });
+});
+app.get("/api/usernameCheck", (req, res) => {
+    // check the username on usernameCheck and then if it's available, return json with usernameAvailable: true
+    signupCheckSQL.get([req.query.username.toLowerCase()], (err, row) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+        console.log(row)
+        if (row) {
+            res.status(200).send({ usernameAvailable: false });
+            return;
+        }
+        res.status(200).send({ usernameAvailable: true });
     });
 });
 
