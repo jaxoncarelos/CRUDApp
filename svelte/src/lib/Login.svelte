@@ -2,8 +2,8 @@
     <div class="login">
         <h1 style="color: #FFF;">Login</h1>
         <form>
-            <input type="text" placeholder="Username" key="username" />
-            <input type="password" placeholder="Password" key="password" />
+            <input type="text" placeholder="Username" key="username" bind:value={username} />
+            <input type="password" placeholder="Password" key="password" bind:value={password} />
             <button on:click={login}>Login</button>
         </form>
         <a href="/register">Don't have an account?</a>
@@ -11,13 +11,10 @@
 </div>
 
 <script>
-
+    let username;
+    let password;
     async function login()
     {
-        const username = document.querySelector('input[key="username"]').value;
-        const password = document.querySelector('input[key="password"]').value;
-        
-
         const response = await fetch('/api/login', {
             method: 'POST',
             headers: {

@@ -73,11 +73,15 @@
         border-radius: 10px;
         padding: 10px;
         margin: 10px;
+        width: 100%;
+    }
+    .post .content{
+        color: white;
     }
     .post .id {
         position: relative;
         color: #FFF;
-        left: 50%;
+        left: 95%;
         font-size: 12px;
         transform: translateY(-50%);
     }
@@ -91,7 +95,6 @@
     .post button {
         position: relative;
         left: 40%;
-        transform: translateX(-40%);
         width: 50px;
         height: 50px;
         border-radius: 50%;

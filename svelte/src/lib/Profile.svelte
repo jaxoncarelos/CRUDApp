@@ -4,10 +4,10 @@
             <h1>404 User Not Found</h1>
         {:else}
         <main>
-            <button on:click={logOut}>Log out</button>
             <Namecard username={username}/>
+            <button on:click={logOut}>Log out</button>
             {#await fetch("/api/fetchUserPosts?username=" + username).then(res => res.json()) then posts}
-                <PostList posts={posts} style="transform: translateY(10%)"/>
+                <PostList class="postList" posts={posts}/>
             {/await}
         </main>
         {/if}
@@ -20,10 +20,10 @@
         align-items: center;
         justify-content: center;
         height: 100vh;
+        width: 100vw;
     }
     button {
         cursor: pointer;
-        position: absolute;
         width: 100px;
         height: 40px;
         border-radius: 5px;

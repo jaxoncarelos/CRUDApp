@@ -10,17 +10,19 @@
 <style>
     .wrapper {
         padding: 10vw;
-        height: 100vh;
+        height: 20%;
         background-color: #292E39;
-    }
-    .name {
-        font-size: 50px;
-        color: white;
-        text-align: center;
     }
     .sub {
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    .name {
+        font-size: 50px;
+        color: white;
+        text-align: center;
     }
 </style>
