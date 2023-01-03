@@ -1,15 +1,15 @@
 <div class="createPosts">
     <h1>Create a post</h1>
-    <input maxlength="32" type="text" placeholder="Enter your post" bind:value={content} />
+    <input type="text" placeholder="Enter your post" bind:value={content} />
     <button on:click={createPost}>Create</button>
 </div>
 
 <script>
     let content;
     const createPost = async () => {
-        if(!content)
+        if(!content || !localStorage.getItem("CRUDAppLoggedIn"))
         {
-            alert("Please enter a post")
+            alert("Invalid")
             return;
         }
         const res = await fetch('/api/createPost', {
@@ -38,9 +38,9 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 30vh;
+        height: 35vh;
         background: #292E39;
-        padding: 20px;
+        padding: 1em;
     }
     .createPosts input {
         width: 300px;
@@ -55,10 +55,9 @@
         height: 40px;
         border-radius: 10px;
         border: none;
-        padding: 10px;
-        margin: 10px;
         background: #765291;
         color: #FFF;
         cursor: pointer;
+        padding: 1em;
     }
 </style>

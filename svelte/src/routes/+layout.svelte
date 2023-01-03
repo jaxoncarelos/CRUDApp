@@ -1,9 +1,10 @@
 <nav>
     <ul>
-        <l2>CRUD App</l2>
+        <l2><a href="/">CRUD App</a></l2>
         {#if browser && localStorage.getItem("CRUDAppUsername") != undefined}
             <li><a href="/profile">{localStorage.getItem("CRUDAppUsername")}</a></li>
         {:else}
+            <li><a href="/register">Register</a></li>
             <li><a href="/login">Login</a></li>
         {/if}
     </ul>
@@ -27,7 +28,6 @@
         padding: 8px;
         position: relative;
         left: 1vw;
-
         float: left;
         font-family: 'Roboto', sans-serif;
         font-size: 20px;
@@ -37,14 +37,14 @@
     li {
         padding: 10px;
         position: relative;
-        left: 92vw;
+        left: 85%;
         float: left;
         font-family: 'Roboto', sans-serif;
         font-size: 15px;
         color: white;
         text-decoration: none;
     }
-    li a {
+    a {
         color: white;
         text-decoration: none;
     }

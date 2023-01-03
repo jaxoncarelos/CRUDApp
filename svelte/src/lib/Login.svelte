@@ -28,7 +28,7 @@
 
         if(response.status === 200)
         {
-            localStorage.setItem("CRUDAppUsername", username);
+            localStorage.setItem("CRUDAppUsername", username.toLowerCase());
             localStorage.setItem("CRUDAppLoggedIn", "true")
             window.location.href = '/';
         } 

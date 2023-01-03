@@ -58,7 +58,7 @@
 </script>
 
 <div class="post">
-    <p class="id">{post.postId}</p>
+
     <h1 class="username">{post.username}</h1>
     <p class="content">{post.content}</p>
     {#if browser && post.username == localStorage.getItem("CRUDAppUsername")}
@@ -72,32 +72,28 @@
         background-color: #171c28;
         border-radius: 10px;
         padding: 10px;
-        margin: 10px;
     }
     .post .content{
         color: white;
+        max-height: 100px;
+        overflow: auto;
+        font-size: 20px;
     }
-    .post .id {
-        position: relative;
-        color: #FFF;
-        font-size: 12px;
-    }
+
     .post .username {
         color: #FFF;
         font-size: 30px;
         text-align: left;
-        padding: 5px;
-        transform: translateY(-50%);
+        margin: 1px;
     }
     .post button {
         position: relative;
-        left: 40%;
         width: 50px;
         height: 50px;
         border-radius: 50%;
         border: none;
         background-color: #765291;
-        color: #FFF;
+        color: rgb(207, 207, 207);
         font-size: 30px;
         cursor: pointer;
     }

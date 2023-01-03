@@ -2,10 +2,10 @@
     <div class="register">
         <h1 style="color: #FFF;">Register</h1>
         <form>
-            <input type="text" placeholder="Username" key="username" />
-            <input type="text" placeholder="Email" key="password" />
-            <input type="password" placeholder="Password" key="password" />
-            <input type="password" placeholder="Confirm Password" />
+            <input bind:value={username} type="text" placeholder="Username" key="username" />
+            <input bind:value={email} type="text" placeholder="Email" key="password" />
+            <input bind:value={password} type="password" placeholder="Password" key="password" />
+            <input bind:value={confirmPassword} type="password" placeholder="Confirm Password" />
             <button on:click={register}>Register</button>
         </form>
         <a href="/login">Already have an account?</a>
@@ -74,6 +74,10 @@
 </style>
 
 <script>
+    let username;
+    let email
+    let password;
+    let confirmPassword;
     const validateEmail = (email) => {
         return String(email)
             .toLowerCase()
@@ -82,7 +86,7 @@
             );
         };
     async function register() {
-        const username = document.querySelector("input[placeholder='Username']").value;
+
 
         const usernameAvailable = await fetch("/api/usernameCheck?username=" + username).then(res => res.json());
 
@@ -94,13 +98,10 @@
         } else {
 
         }
-        const email = document.querySelector("input[placeholder='Email']").value;
         if(!validateEmail(email)) {
             alert("Email is not valid");
             return;
         }
-        const password = document.querySelector("input[placeholder='Password']").value;
-        const confirmPassword = document.querySelector("input[placeholder='Confirm Password']").value;
         if(password !== confirmPassword) {
             alert("Passwords do not match");
             return;
