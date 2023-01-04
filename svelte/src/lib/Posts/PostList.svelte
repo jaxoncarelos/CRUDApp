@@ -18,8 +18,8 @@
         position: relative;
         top: 3em;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
+        grid-template-columns: repeat(2, 1fr);
         grid-gap: 1rem;
-
+        padding: 1rem;
     }
 </style>

@@ -50,6 +50,9 @@
         padding: 10px;
         margin: 10px;
     }
+    .createPosts h1 {
+        font-size: 2em;
+    }
     .createPosts button {
         width: 320px;
         height: 40px;

@@ -1,6 +1,7 @@
 <script>
     export let post;
-
+    let content;
+    let editButton;	
     import {browser} from '$app/environment'
     function handleDelete(){
 
@@ -23,15 +24,13 @@
     }
     function handleEdit(){
         // make the p element with the class of content editable
-        let content = document.querySelector(".content")
-        content.contentEditable = true;
+	    content.contentEditable = true;
         content.focus();
         // make the button with the text of 🔧 into a button with the text of ✔️
-        let editButton = document.querySelector(".editButton")
         editButton.innerHTML = "✔️"
         // on editButton click submit the new content to the server
-        editButton.onclick = async () => {
-            // make the p element with the class of content not editable
+	    editButton.onclick = async () => {
+	    // make the p element with the class of content not editable
             content.contentEditable = false;
             // make the button with the text of ✔️ into a button with the text of 🔧
             editButton.innerHTML = "🔧"
@@ -60,10 +59,10 @@
 <div class="post">
 
     <h1 class="username">{post.username}</h1>
-    <p class="content">{post.content}</p>
+    <p on:focus={() => { this.value = this.value }}  bind:this={content} class="content">{post.content}</p>
     {#if browser && post.username == localStorage.getItem("CRUDAppUsername")}
         <button on:click={handleDelete}>X</button>
-        <button class="editButton" on:click={handleEdit}>🔧</button>
+        <button bind:this={editButton} class="editButton" on:click={handleEdit}>🔧</button>
     {/if}
 </div>
 
@@ -71,7 +70,9 @@
     .post {
         background-color: #171c28;
         border-radius: 10px;
-        padding: 10px;
+        padding: 1rem;
+    	min-height: 3em;
+        min-width: 70%;
     }
     .post .content{
         color: white;

@@ -4,7 +4,7 @@ export const manifest = {
 	assets: new Set(["blank.webp","favicon.png","smui-dark.css","smui.css"]),
 	mimeTypes: {".webp":"image/webp",".png":"image/png",".css":"text/css"},
 	_: {
-		entry: {"file":"_app/immutable/start-642bf430.js","imports":["_app/immutable/start-642bf430.js","_app/immutable/chunks/index-020402b1.js","_app/immutable/chunks/singletons-fb61ab81.js"],"stylesheets":[],"fonts":[]},
+		entry: {"file":"_app/immutable/start-637e1326.js","imports":["_app/immutable/start-637e1326.js","_app/immutable/chunks/index-c434c163.js","_app/immutable/chunks/singletons-8f54ed48.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),

@@ -43,5 +43,6 @@
     main div {
         text-align: center;
         font-size: 60px;
-    }
+	padding: 1rem;
+	}
 </style>
