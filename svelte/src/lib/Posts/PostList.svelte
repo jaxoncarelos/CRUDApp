@@ -15,9 +15,11 @@
 
 <style>
     .postList {
+        position: relative;
+        top: 3em;
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(20vw, 3fr));
-        grid-gap: 10px;
-        padding: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
+        grid-gap: 1rem;
+
     }
 </style>

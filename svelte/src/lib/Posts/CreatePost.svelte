@@ -1,13 +1,13 @@
 <div class="createPosts">
     <h1>Create a post</h1>
-    <input type="text" placeholder="Enter your post" bind:value={content} />
+    <input  type="text" placeholder="Enter your post" bind:value={content} />
     <button on:click={createPost}>Create</button>
 </div>
 
 <script>
     let content;
     const createPost = async () => {
-        if(!content || !localStorage.getItem("CRUDAppLoggedIn"))
+        if(!content || !localStorage.getItem("CRUDAppUsername"))
         {
             alert("Invalid")
             return;
