@@ -23,18 +23,17 @@
         window.location.reload();
     }
     function handleEdit(){
-        // make the p element with the class of content editable
-	    content.contentEditable = true;
+
+	content.contentEditable = true;
         content.focus();
-        // make the button with the text of 🔧 into a button with the text of ✔️
+
         editButton.innerHTML = "✔️"
-        // on editButton click submit the new content to the server
-	    editButton.onclick = async () => {
-	    // make the p element with the class of content not editable
-            content.contentEditable = false;
-            // make the button with the text of ✔️ into a button with the text of 🔧
-            editButton.innerHTML = "🔧"
-            // submit the new content to the server
+
+
+        content.contentEditable = false;
+
+        editButton.innerHTML = "🔧"
+
             const res = await fetch('/api/editPost', {
                 method: 'POST',
                 headers: {
