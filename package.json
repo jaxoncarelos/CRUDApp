@@ -5,7 +5,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "npm install; node server.js"
+    "build": "npm install; node server.js",
     "first-run": "npm install; cd svelte; npm install; cd ..; node server.js"
   },
   "author": "",
